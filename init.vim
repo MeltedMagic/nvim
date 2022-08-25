@@ -2,8 +2,13 @@
 set number
 "Use mouse
 set mouse=a
+"Line Wrap
+set wrap
+set linebreak "keep from breaking in middle of word
+
+
 "Set Python 3 Version
-let g:python3_host_prog='/usr/local/opt/python@3.10/bin/python3'
+let g:python3_host_prog='/opt/local/bin/python3'
 
 
 call plug#begin()
@@ -33,15 +38,15 @@ Plug 'foxbunny/vim-amber'
 Plug 'sabrinagannon/vim-garbage-oracle'
 Plug 'scolsen/wurm'
 Plug 'sainnhe/everforest'
-Plug 'vim-airline/vim-airline-themes' "status bar themes
 Plug 'arzg/vim-colors-xcode'
+Plug 'vim-airline/vim-airline-themes' "status bar themes
 
 """----------------------|
 
 """Multi-Use------------/
 """""Useful for multiple systems(python, LaTeX, etc.)
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "autocomplete
-Plug 'SirVer/ultisnips' "custom autocomplete
+Plug 'SirVer/ultisnips' "code snippets -- stop typing repetitive lines of code
 Plug 'jiangmiao/auto-pairs' "insert another quote or bracket after typing quote or bracket
 Plug 'scrooloose/nerdcommenter' "macro for inserting comment for all languages
 Plug 'sbdchd/neoformat' "format source code
@@ -61,10 +66,8 @@ Plug 'zchee/deoplete-jedi' "Autocomplete, Static Analysis, & Refactoring Library
 
 """--------------------/
 
-"""R-------------------/
+"""Nvim-R--------------/
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
-
-"""--------------------/
 
 
 call plug#end()
@@ -72,13 +75,13 @@ call plug#end()
 """Themes----------------|
 set termguicolors
 syntax on
-colorscheme melange
+colorscheme everforest
 set background=light
-let g:airline_theme="base16_aquarium_dark"
+let g:airline_theme="everforest"
 "colorscheme simba
 "colorscheme simba-light
 "colorscheme aquarium
-let g:aquarium_style="dark"
+let g:aquarium_style="light"
 	"light","dark"
 	"vim-airline : base16_aquarium_light
 	"vim-airline : base16_aquarium_dark
@@ -112,7 +115,7 @@ let g:aquarium_style="dark"
 "colorscheme wurm
 "colorscheme everforest
 "colorscheme xcodedark
-"colorscheme xcodedarkhc
+"colorscheme xcodedarkhc	
 "colorscheme xcodelight
 "colorscheme xcodelighthc
 "colorscheme xcodewwdc
@@ -155,7 +158,6 @@ let g:vimtex_view_method = "skim"
 let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
 let g:vimtex_view_general_options = '-r @line @pdf @tex'
 
-
 augroup vimtex_mac
     autocmd!
     autocmd User VimtexEventCompileSuccess call UpdateSkim()
@@ -172,7 +174,6 @@ function! UpdateSkim() abort
 
     call jobstart(l:cmd + [line('.'), l:out, l:src_file_path])
 endfunction
-
 """Supress Warnings
 let g:vimtex_quickfix_open_on_warning = 0
 
@@ -188,6 +189,9 @@ let g:vimtex_toc_config = {
       \ 'mode' : 2,
       \}
 
+
+"""-----------------/
+
 """""Compilation Settings
    let g:vimtex_compiler_latexmk = {
         \ 'build_dir' : '',
@@ -196,6 +200,7 @@ let g:vimtex_toc_config = {
         \ 'executable' : 'latexmk',
         \ 'hooks' : [],
         \ 'options' : [
+	    \ 	'-pdflatex=xelatex',
         \   '-file-line-error',
         \   '-synctex=1',
         \   '-interaction=nonstopmode',
@@ -213,13 +218,11 @@ set splitbelow
 """-----------------/
 
 """Ultisnips--------/
-let g:UltiSnipsExpandTrigger='<tab>' "activate ultisnips
-let g:UltiSnipsJumpForwardTrigger='<c-j>' "next position
-let g:UltiSnipsJumpBackwardTrigger='<c-k>' "last position
-
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger='<c-j>' "go to next position
+let g:UltiSnipsJumpBackwardTrigger='<c-k>' "go to last position
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnips"]
-
-"""-----------------/
+"""----------------/
 
 """Neoformat-------/
 """""Autoformatter
@@ -247,15 +250,15 @@ hi HighlightedyankRegion cterm=reverse gui=reverse
 
 """---------------/
 
-"""NvimR----------/
-\ 'omni_patterns':  {
-    \ 'r': ['[^. *\t]\.\w*', '\h\w*::\w*', '\h\w*\$\w*'],
-\},
-call deoplete#custom#source('omni_patterns', {
-    \ 'r': '[^. *\t]\.\w*',
-\})
+"""Nvim-R---------/
+"Use R with autocomplete
+call deoplete#custom#var('omni', 'input_patterns', {
+        \ 'r': '[^. *\t]\.\w*',
+    \ }
+\)
 
-"""--------------/
+
+"""---------------/
 
 
 

@@ -1,7 +1,52 @@
-snippet ali "aligned-eq" bi
+snippet ali "Align-eq"
 \begin{equation*}
 \begin{aligned}
 	${0:${VISUAL}}
 \end{aligned}
 \end{equation*}
+endsnippet
+
+snippet def "Definitions"
+\begin{defn}
+	\textbf{${0:${VISUAL}}:}
+\end{defn}
+endsnippet
+
+snippet fra "Frame"
+\begin{frame}
+	${0:${VISUAL}}
+\end{frame}
+endsnippet
+
+snippet column "Columns" 
+\begin{columns}
+	${0:${VISUAL}}
+\end{columns}
+endsnippet
+
+snippet image "Images"
+\begin{figure}
+	\includegraphics[width=1\textwidth]{${0:${VISUAL}}}
+\end{figure}
+endsnippet
+
+snippet list "Itemise"
+\begin{itemize}
+	\item 			
+	\item 
+\end{itemize}
+endsnippet
+
+snippet frame "Slide"
+\begin{frame}
+	\frametitle{${0:${VISUAL}}}
+\end{frame}
+endsnippet
+
+snippet qa "Question & Solution"
+\begin{Question}[${0:${VISUAL}}] 
+\end{Question}
+\begin{proof}[\underline{Solution}]
+	\hfill \break
+\end{proof}
 endsnippet
